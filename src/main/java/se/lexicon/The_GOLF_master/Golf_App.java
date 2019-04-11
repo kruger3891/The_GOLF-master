@@ -1,24 +1,25 @@
 package se.lexicon.The_GOLF_master;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.util.Random;
 
 public class Golf_App {
-	
-	static Scanner scan = new Scanner(System.in);
-	static Random random = new Random();
-	static inputNumberScann sc = new inputNumberScann();
-	static ArrayList<Shot> shotList = new ArrayList<Shot>();
 
-	public static int distanceToHole = random.nextInt(320) + 80;
-	public static int shotCountMax = 5;
-	public static int velocity;
-	public static int angle;
-	public static String playAgain;
-	public static int ballPosition;
+	Scanner scan = new Scanner(System.in);
+	Random random = new Random();
+	inputNumberScann sc = new inputNumberScann();
+	ArrayList<Shot> shotList = new ArrayList<Shot>();
 
-	public static void main(String[] args) {
+	public int distanceToHole = random.nextInt(320) + 80;
+	public int shotCountMax = 5;
+	public int velocity;
+	public int angle;
+	public String playAgain;
+	public int ballPosition;
+
+	public void play() {
 
 		boolean run = true;
 		System.out.println("\t\tWelcome to My golf");
@@ -40,7 +41,7 @@ public class Golf_App {
 				int distance = shot.getDistance();
 				getShotCountMax();
 				distanceToHole = getNewDistance(distance, distanceToHole);
-				
+
 				shotList.add(shot);
 
 				System.out.println("Your ball bounce: " + distance + " m ");
@@ -54,12 +55,13 @@ public class Golf_App {
 
 				if (distanceToHole < 0) {
 					distanceToHole = (0 - distanceToHole);
-				}
-				if (shotCountMax < -1) {
-					System.out.println("You lost!!!");
-					run = false;
+
 				} else if (distanceToHole <= 0.1 && distanceToHole >= -0.1) {
 					System.out.println("You won");
+					run = false;
+
+				} else if (shotCountMax <= 0) {
+					System.out.println("You lost!!!");
 					run = false;
 				}
 
@@ -68,7 +70,10 @@ public class Golf_App {
 
 			System.out.println("Would you like to play again (y/n)?");
 			run = false;
-			
+
+			distanceToHole = random.nextInt(320) + 80;
+			shotList = new ArrayList<Shot>();
+			shotCountMax = 5;
 			playAgain = scan.nextLine().toLowerCase();
 			if (playAgain.equals("y")) {
 				run = true;
@@ -84,11 +89,7 @@ public class Golf_App {
 
 	}
 
-	public static void setDistanceToHole(int distanceToHole) {
-		Golf_App.distanceToHole = distanceToHole;
-	}
-
-	public static int getShotCountMax() {
+	public int getShotCountMax() {
 		int index = 0;
 
 		for (Shot shot : shotList) {
@@ -99,41 +100,14 @@ public class Golf_App {
 		return shotCountMax;
 	}
 
-	public static void setShotCountMax(int shotCountMax) {
-		Golf_App.shotCountMax = shotCountMax;
-	}
-
-	public static int getVelocity() {
+	public int getVelocity() {
 		velocity = sc.inputNumber(1, 60);
 		return velocity;
 	}
 
-	public static void setVelocity(int velocity) {
-		Golf_App.velocity = velocity;
-	}
-
-	public static int getAngle() {
+	public int getAngle() {
 		angle = sc.inputNumber(1, 55);
 		return angle;
 	}
 
-	public static void setAngle(int angle) {
-		Golf_App.angle = angle;
-	}
-
-	public static String getPlayAgain() {
-		return playAgain;
-	}
-
-	public static void setPlayAgain(String playAgain) {
-		Golf_App.playAgain = playAgain;
-	}
-
-	public static int getBallPosition() {
-		return ballPosition;
-	}
-
-	public static void setBallPosition(int ballPosition) {
-		Golf_App.ballPosition = ballPosition;
-	}
 }

@@ -2,6 +2,8 @@ package spring_boot_Maga.The_GOLF_master;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import se.lexicon.The_GOLF_master.Golf_App;
 import se.lexicon.The_GOLF_master.Shot;
 
 public class Golf_Test {
